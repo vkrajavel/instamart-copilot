@@ -217,3 +217,4 @@ which erases most of the saving, and branches such as "refund above INR 1000 -> 
 - Ages filled with city medians include 21 values ending in .5; the synthetic data has no real age signal, and a fixed grid of tuned models was used, so the lapse F1 (about 0.65) is modest. My logistic regression chose C = 100 rather than 1, which does not change the conclusions.
 - The mock LLM is keyword-based, so classification and policy answers show the engineering pattern (guardrails, retries, validation, budgets) rather than real-model quality; zero-shot vs few-shot differences reflect its rules.
 - Next steps: add real timestamps and identity to the agent; compare TF-IDF retrieval with embeddings; validate the lapse model on a rolling window; measure retention-campaign uplift; and review the 17 human-review tickets to learn which validation failures recur.
+# instamart-copilot
