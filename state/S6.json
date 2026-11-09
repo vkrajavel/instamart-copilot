@@ -1,0 +1,52 @@
+{
+ "run_id": "S6",
+ "scenario_id": "S6",
+ "user_message": "Refund for order ORD-999999 please.",
+ "messages": [
+  {
+   "role": "system",
+   "content": "You are a refund AGENT for a grocery delivery company. Use the tools to look up the order, check the refund policy, calculate the refund, then issue it or escalate it to a human. Finish with one line starting with REFUND:, ESCALATE:, DENIED: or NOT_FOUND:."
+  },
+  {
+   "role": "user",
+   "content": "Refund for order ORD-999999 please."
+  },
+  {
+   "role": "assistant",
+   "content": null,
+   "tool_calls": [
+    {
+     "id": "call_1",
+     "name": "get_order",
+     "arguments": {
+      "order_id": "ORD-999999"
+     }
+    }
+   ]
+  },
+  {
+   "role": "tool",
+   "tool_call_id": "call_1",
+   "name": "get_order",
+   "content": "{\"error\": \"order not found\"}"
+  }
+ ],
+ "tokens_used": 76,
+ "llm_calls": 1,
+ "step": 1,
+ "tools_executed": [
+  "get_order"
+ ],
+ "steps": [
+  {
+   "step": 1,
+   "tool": "get_order",
+   "arguments": {
+    "order_id": "ORD-999999"
+   },
+   "observation": {
+    "error": "order not found"
+   }
+  }
+ ]
+}

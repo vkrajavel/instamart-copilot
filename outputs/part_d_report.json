@@ -1,0 +1,170 @@
+{
+  "retrieval_demo_sources": [
+    "refund_policy.txt",
+    "refund_policy.txt",
+    "refund_policy.txt"
+  ],
+  "overlap_10": {
+    "chunks": 15,
+    "chunks_per_source": {
+      "delivery_policy.txt": 3,
+      "escalation_policy.txt": 3,
+      "payment_policy.txt": 3,
+      "privacy_policy.txt": 2,
+      "refund_policy.txt": 4
+    },
+    "answerable": 12,
+    "doc_in_top3": 12,
+    "fact_in_answer": 12,
+    "unanswerable": 2,
+    "fallback_answers": 2,
+    "failed_questions": []
+  },
+  "overlap_0": {
+    "chunks": 13,
+    "chunks_per_source": {
+      "delivery_policy.txt": 3,
+      "escalation_policy.txt": 2,
+      "payment_policy.txt": 3,
+      "privacy_policy.txt": 2,
+      "refund_policy.txt": 3
+    },
+    "answerable": 12,
+    "doc_in_top3": 12,
+    "fact_in_answer": 10,
+    "unanswerable": 2,
+    "fallback_answers": 2,
+    "failed_questions": [
+      {
+        "question": "What delivery time makes a completed order eligible for a full refund?",
+        "expected_fact": "more than 45 minutes",
+        "answer": "receives a full refund of the order amount."
+      },
+      {
+        "question": "How soon is money returned when a payment fails but is deducted?",
+        "expected_fact": "48 hours",
+        "answer": "If a payment fails but money is deducted, the amount is returned automatically\n \n1000 must be approved by a human support lead before money is returned."
+      }
+    ]
+  },
+  "scenarios": [
+    {
+      "scenario_id": "S1",
+      "expected": "REFUND",
+      "status": "REFUND",
+      "refund_inr": 128.25,
+      "llm_calls": 5,
+      "tokens_used": 1127,
+      "steps": 4,
+      "correct": true
+    },
+    {
+      "scenario_id": "S2",
+      "expected": "REFUND",
+      "status": "REFUND",
+      "refund_inr": 135.0,
+      "llm_calls": 5,
+      "tokens_used": 1127,
+      "steps": 4,
+      "correct": true
+    },
+    {
+      "scenario_id": "S3",
+      "expected": "ESCALATE",
+      "status": "ESCALATE",
+      "refund_inr": 1999.0,
+      "llm_calls": 5,
+      "tokens_used": 1114,
+      "steps": 4,
+      "correct": true
+    },
+    {
+      "scenario_id": "S4",
+      "expected": "DENIED",
+      "status": "DENIED",
+      "refund_inr": 0.0,
+      "llm_calls": 4,
+      "tokens_used": 789,
+      "steps": 3,
+      "correct": true
+    },
+    {
+      "scenario_id": "S5",
+      "expected": "DENIED",
+      "status": "DENIED",
+      "refund_inr": 0.0,
+      "llm_calls": 3,
+      "tokens_used": 475,
+      "steps": 2,
+      "correct": true
+    },
+    {
+      "scenario_id": "S6",
+      "expected": "NOT_FOUND",
+      "status": "NOT_FOUND",
+      "refund_inr": 0.0,
+      "llm_calls": 2,
+      "tokens_used": 164,
+      "steps": 1,
+      "correct": true
+    },
+    {
+      "scenario_id": "S7",
+      "expected": "FALLBACK",
+      "status": "FALLBACK_MAX_ITERATIONS",
+      "refund_inr": 0.0,
+      "llm_calls": 6,
+      "tokens_used": 3276,
+      "steps": 6,
+      "correct": true
+    }
+  ],
+  "demos": {
+    "token_limit_200": {
+      "status": "FALLBACK_TOKEN_LIMIT",
+      "llm_calls": 3,
+      "tokens_used": 492,
+      "tools_executed": [
+        "get_order",
+        "search_policy"
+      ],
+      "final_answer": "FALLBACK_TOKEN_LIMIT: automated handling stopped after 2 step(s) (get_order, search_policy). Human agent please review request: My order ORD-100048 reached me very late. I would like a refund."
+    },
+    "time_limit_0": {
+      "status": "FALLBACK_TIMEOUT",
+      "llm_calls": 0,
+      "tools_executed": [],
+      "final_answer": "FALLBACK_TIMEOUT: automated handling stopped after 0 step(s) (none). Human agent please review request: My order ORD-100048 reached me very late. I would like a refund."
+    },
+    "crash_and_resume": {
+      "crashed": true,
+      "checkpoint_step_at_crash": 2,
+      "tools_before_crash": [
+        "get_order",
+        "search_policy"
+      ],
+      "tools_executed_total": [
+        "get_order",
+        "search_policy",
+        "calculate_refund",
+        "issue_refund"
+      ],
+      "final_status": "REFUND",
+      "refund_inr": 128.25,
+      "llm_calls": 5,
+      "ledger_replayed": true
+    }
+  },
+  "ledger_lines": 3,
+  "state_files": [
+    "S1-crash-demo.json",
+    "S1-token-limit-demo.json",
+    "S1.json",
+    "S2.json",
+    "S3.json",
+    "S4.json",
+    "S5.json",
+    "S6.json",
+    "S7.json"
+  ]
+}

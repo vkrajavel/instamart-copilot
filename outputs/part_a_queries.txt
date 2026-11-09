@@ -1,0 +1,126 @@
+PART A - SQL RESULTS
+
+## q1_big_orders_having (30 rows)
+customer_id  big_orders  total_inr
+      C0693           6   13776.55
+      C0082           5   12317.70
+      C0743           5   12266.85
+      C0525           6   12241.30
+      C0291           6   12150.70
+      C0267           6   12150.25
+      C0488           6   11825.50
+      C0699           8   11693.90
+      C0512           5   11617.65
+      C0332           6   10779.50
+      C0543           7   10636.10
+      C0775           5   10263.55
+
+## q2_revenue_city_category (30 rows)
+     city    category  revenue_inr
+Bengaluru Electronics    233909.45
+Hyderabad Electronics    228913.10
+   Mumbai Electronics    214738.40
+  Chennai Electronics    195508.80
+     Pune Electronics    187629.25
+    Delhi Electronics    158549.10
+    Delhi       Dairy    117271.70
+    Delhi     Grocery    112658.05
+Bengaluru     Grocery    110915.65
+Hyderabad     Grocery    109475.40
+     Pune     Grocery    108456.60
+  Chennai     Grocery     93817.45
+
+## q3_products_above_average_price (11 rows)
+product_id        product_name      category  price_inr
+      P038   Bluetooth Speaker   Electronics       1999
+      P033    Wireless Earbuds   Electronics       1499
+      P034 Power Bank 10000mAh   Electronics       1299
+      P036   Phone Charger 20W   Electronics        799
+      P037          Smart Bulb   Electronics        599
+      P040    Memory Card 64GB   Electronics        549
+      P032       Sunscreen 50g Personal Care        399
+      P030   Body Lotion 400ml Personal Care        350
+      P039         Phone Stand   Electronics        349
+      P014          Ghee 500ml         Dairy        340
+      P035      USB-C Cable 1m   Electronics        299
+
+## q4_customers_without_completed_order (25 rows)
+customer_id      city
+      C0029 Hyderabad
+      C0037      Pune
+      C0093      Pune
+      C0115 Bengaluru
+      C0120 Bengaluru
+      C0151      Pune
+      C0354   Chennai
+      C0363   Chennai
+      C0412     Delhi
+      C0461 Bengaluru
+      C0477    Mumbai
+      C0500 Hyderabad
+
+## q5_above_average_spenders (550 rows)
+customer_id  total_spend_inr  average_spend_inr
+      C0693         14766.55            2552.06
+      C0291         13742.60            2552.06
+      C0488         13187.50            2552.06
+      C0082         12856.20            2552.06
+      C0743         12730.05            2552.06
+      C0525         12719.70            2552.06
+      C0699         12471.80            2552.06
+      C0267         12210.25            2552.06
+      C0332         11806.40            2552.06
+      C0512         11617.65            2552.06
+      C0543         11195.10            2552.06
+      C0775         10759.20            2552.06
+
+## q6_rank_within_city (1175 rows)
+     city customer_id  total_spend_inr  spend_rank  spend_dense_rank  spend_row_number
+Bengaluru       C0082         12856.20           1                 1                 1
+Bengaluru       C0525         12719.70           2                 2                 2
+Bengaluru       C0699         12471.80           3                 3                 3
+Bengaluru       C0543         11195.10           4                 4                 4
+Bengaluru       C1147         10156.90           5                 5                 5
+Bengaluru       C0407          9945.85           6                 6                 6
+Bengaluru       C0942          8643.60           7                 7                 7
+Bengaluru       C1126          8595.70           8                 8                 8
+Bengaluru       C0916          8444.85           9                 9                 9
+Bengaluru       C0098          8151.20          10                10                10
+Bengaluru       C1102          7503.60          11                11                11
+Bengaluru       C0230          7286.95          12                12                12
+
+## q7_daily_revenue_running_total (183 rows)
+       day  revenue_inr  cumulative_revenue_inr
+2025-04-01     16876.50                16876.50
+2025-04-02     19854.55                36731.05
+2025-04-03     28048.35                64779.40
+2025-04-04     14249.60                79029.00
+2025-04-05     16031.50                95060.50
+2025-04-06     26323.80               121384.30
+2025-04-07     15606.90               136991.20
+2025-04-08     17055.45               154046.65
+2025-04-09     20403.35               174450.00
+2025-04-10     15359.90               189809.90
+2025-04-11     15291.35               205101.25
+2025-04-12     13005.60               218106.85
+
+## pandas pivot (completed revenue, INR)
+category       Dairy  Electronics    Grocery  Personal Care     Snacks       Total
+city                                                                              
+Bengaluru   87075.05    233909.45  110915.65       20193.85   71549.40   523643.40
+Chennai     78301.80    195508.80   93817.45       27675.40   68325.70   463629.15
+Delhi      117271.70    158549.10  112658.05       23471.50   90879.45   502829.80
+Hyderabad   83731.00    228913.10  109475.40       24800.05   81670.35   528589.90
+Mumbai      75209.85    214738.40   78970.15       38018.00   72122.10   479058.50
+Pune        90349.55    187629.25  108456.60       34275.15   80207.50   500918.05
+Total      531938.95   1219248.10  614293.30      168433.95  464754.50  2998668.80
+
+## by city
+           total_inr  mean_inr  orders
+city                                  
+Bengaluru  523643.40    276.47    1894
+Chennai    463629.15    272.72    1700
+Delhi      502829.80    243.62    2064
+Hyderabad  528589.90    284.95    1855
+Mumbai     479058.50    297.00    1613
+Pune       500918.05    252.48    1984
